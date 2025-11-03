@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject enemyPrefab, enemies;
     public int EnemiesToSpawn = 1000;
+    public CanvasController canvasController;
+    public GameObject markedAsFirstSelected;
 
     public GameObject player;
 
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
                 instance.gameState = GameState.MENU;
                 instance.mainMenu.SetActive(true);
                 ResetGame();
+                instance.canvasController.SetEventSystemFirstSelected(markedAsFirstSelected);
             }
         }
     }
