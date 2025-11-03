@@ -841,7 +841,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   enemyPrefab: {fileID: 1276541067}
   EnemiesToSpawn: 1000
-  playerSpeed: 5
   player: {fileID: 1671508997}
   mainMenu: {fileID: 1156308796}
   settings: {fileID: 1062916458}
@@ -1252,6 +1251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   moving: 1
+  speed: 3
 --- !u!58 &1276541071
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1936,6 +1936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9a3b4f794aed540bd421631f8d17f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  playerSpeed: 10
 --- !u!1 &1794247713
 GameObject:
   m_ObjectHideFlags: 0
