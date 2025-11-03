@@ -871,10 +871,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   enemyPrefab: {fileID: 1276541067}
+  enemies: {fileID: 471012685}
   EnemiesToSpawn: 1000
   player: {fileID: 1671508997}
   mainMenu: {fileID: 1156308796}
   settings: {fileID: 1062916458}
+  enemiesList: []
   gameState: 0
 --- !u!1 &900030107
 GameObject:
@@ -1195,7 +1197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1276541068
 SpriteRenderer:
   m_ObjectHideFlags: 0

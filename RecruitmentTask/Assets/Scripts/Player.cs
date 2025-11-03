@@ -15,6 +15,11 @@ public class Player : MonoBehaviour
 
         move = move.normalized * playerSpeed * Time.deltaTime;
         transform.position += (Vector3)move;
+
+        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+        pos.x = Mathf.Clamp01(pos.x);
+        pos.y = Mathf.Clamp01(pos.y);
+        transform.position = Camera.main.ViewportToWorldPoint(new Vector3(pos.x, pos.y, 10));
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

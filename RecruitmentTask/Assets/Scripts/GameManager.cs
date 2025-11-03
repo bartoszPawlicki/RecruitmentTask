@@ -42,6 +42,16 @@ public class GameManager : MonoBehaviour
     {
         CreateEnemies();
     }
+
+    private void ResetGame()
+    {
+        for (int i = 0; i < enemies.transform.childCount; i++)
+        {
+            enemies.transform.GetChild(i).gameObject.SetActive(false);
+            enemies.transform.GetChild(i).position = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            enemies.transform.GetChild(i).GetComponent<Enemy>().moving = true;
+        }
+    }
     private void Update()
     {
         if (instance.gameState == GameState.GAME)
@@ -50,6 +60,7 @@ public class GameManager : MonoBehaviour
             {
                 instance.gameState = GameState.MENU;
                 instance.mainMenu.SetActive(true);
+                ResetGame();
             }
         }
     }
@@ -60,6 +71,7 @@ public class GameManager : MonoBehaviour
         {
             var temp = Instantiate(enemyPrefab, new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), Quaternion.identity);
             temp.transform.parent = enemies.transform;
+            temp.SetActive(true);
         }
     }
     
