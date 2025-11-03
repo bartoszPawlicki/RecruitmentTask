@@ -839,6 +839,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75833e7045231774397e3b25af08a1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  enemyPrefab: {fileID: 1276541067}
+  EnemiesToSpawn: 1000
+  playerSpeed: 5
+  player: {fileID: 1671508997}
   mainMenu: {fileID: 1156308796}
   settings: {fileID: 1062916458}
   gameState: 0
