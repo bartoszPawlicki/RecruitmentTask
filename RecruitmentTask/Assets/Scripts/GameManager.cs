@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,5 +29,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameState = GameState.MENU;
+    }
+
+    private void Update()
+    {
+        if (instance.gameState == GameState.GAME)
+        {
+            if (Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                instance.gameState = GameState.MENU;
+                instance.mainMenu.SetActive(true);
+            }
+        }
     }
 }
