@@ -15,6 +15,11 @@ public class Enemy : MonoBehaviour
         {
             Vector3 dir = transform.position - GameManager.instance.player.transform.position;
             transform.position += speed * Time.deltaTime * dir.normalized;
+
+            Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+            pos.x = Mathf.Clamp01(pos.x);
+            pos.y = Mathf.Clamp01(pos.y);
+            transform.position = Camera.main.ViewportToWorldPoint(new Vector3(pos.x, pos.y, 10));
         }
     }
 }

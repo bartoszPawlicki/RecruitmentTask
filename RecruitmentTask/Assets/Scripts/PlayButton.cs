@@ -6,5 +6,6 @@ public class PlayButton : MonoBehaviour
     {
         GameManager.instance.gameState = GameManager.GameState.GAME;
         GameManager.instance.mainMenu.SetActive(false);
+        GameManager.instance.StartGame();
     }
 }

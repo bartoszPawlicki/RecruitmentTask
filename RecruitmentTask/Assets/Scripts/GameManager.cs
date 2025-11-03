@@ -1,15 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public GameObject enemyPrefab;
+    public GameObject enemyPrefab, enemies;
     public int EnemiesToSpawn = 1000;
 
     public GameObject player;
 
     public GameObject mainMenu, settings;
+
+    public List<GameObject> enemiesList;
 
     private void Awake()
     {
@@ -35,6 +38,10 @@ public class GameManager : MonoBehaviour
         gameState = GameState.MENU;
     }
 
+    public void StartGame()
+    {
+        CreateEnemies();
+    }
     private void Update()
     {
         if (instance.gameState == GameState.GAME)
@@ -44,6 +51,21 @@ public class GameManager : MonoBehaviour
                 instance.gameState = GameState.MENU;
                 instance.mainMenu.SetActive(true);
             }
+            HandleMovement();
+        }
+    }
+
+    public void HandleMovement()
+    {
+        if(GameManager.instance.gameState == GameManager.GameState.GAME && moving)
+        {
+            Vector3 dir = transform.position - GameManager.instance.player.transform.position;
+            transform.position += speed * Time.deltaTime * dir.normalized;
+
+            Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+            pos.x = Mathf.Clamp01(pos.x);
+            pos.y = Mathf.Clamp01(pos.y);
+            transform.position = Camera.main.ViewportToWorldPoint(new Vector3(pos.x, pos.y, 10));
         }
     }
 
@@ -51,7 +73,9 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < EnemiesToSpawn; i++)
         {
-            Instantiate(enemyPrefab);
+            var temp = Instantiate(enemyPrefab, new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), Quaternion.identity);
+            temp.transform.parent = enemies.transform;
+            enemiesList.Add(temp);
         }
     }
     
