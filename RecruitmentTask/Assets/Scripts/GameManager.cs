@@ -4,17 +4,20 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
+    public enum GameState
+    {
+        MENU,
+        SETTINGS,
+        GAME
+    }
+
     public static GameManager instance;
-    public GameObject enemyPrefab, enemies;
-    public int EnemiesToSpawn = 1000;
+
+    public GameObject enemyPrefab, enemies, player, mainMenu, settings, markedAsFirstSelected;
+   
     public CanvasController canvasController;
-    public GameObject markedAsFirstSelected;
-
-    public GameObject player;
-
-    public GameObject mainMenu, settings;
-
-    public List<GameObject> enemiesList;
+    public int EnemiesToSpawn = 1000;
+    public GameState gameState;
 
     private void Awake()
     {
@@ -27,32 +30,10 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         }
     }
-    public enum GameState
-    {
-        MENU,
-        SETTINGS,
-        GAME
-    }
-    public GameState gameState;
-
+    
     private void Start()
     {
         gameState = GameState.MENU;
-    }
-
-    public void StartGame()
-    {
-        CreateEnemies();
-    }
-
-    private void ResetGame()
-    {
-        for (int i = 0; i < enemies.transform.childCount; i++)
-        {
-            enemies.transform.GetChild(i).gameObject.SetActive(false);
-            enemies.transform.GetChild(i).position = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
-            enemies.transform.GetChild(i).GetComponent<Enemy>().moving = true;
-        }
     }
     private void Update()
     {
@@ -67,7 +48,23 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    public void StartGame()
+    {
+        CreateEnemies();
+        player.SetActive(true);
+    }
 
+    private void ResetGame()
+    {
+        player.SetActive(false);
+        for (int i = 0; i < enemies.transform.childCount; i++)
+        {
+            enemies.transform.GetChild(i).gameObject.SetActive(false);
+            enemies.transform.GetChild(i).position = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
+            enemies.transform.GetChild(i).GetComponent<Enemy>().moving = true;
+        }
+    }
+    
     public void CreateEnemies()
     {
         for (int i = 0; i < EnemiesToSpawn; i++)
@@ -77,5 +74,4 @@ public class GameManager : MonoBehaviour
             temp.SetActive(true);
         }
     }
-    
 }

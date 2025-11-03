@@ -5,9 +5,11 @@ public class Player : MonoBehaviour
 {
 
     public float playerSpeed;
+    Vector2 move;
+    Vector3 pos;
     public void HandleMoevement()
     {
-        Vector2 move = Vector2.zero;
+        move = Vector2.zero;
         if (Keyboard.current.wKey.isPressed) move.y += 1;
         if (Keyboard.current.sKey.isPressed) move.y -= 1;
         if (Keyboard.current.aKey.isPressed) move.x -= 1;
@@ -16,7 +18,7 @@ public class Player : MonoBehaviour
         move = move.normalized * playerSpeed * Time.deltaTime;
         transform.position += (Vector3)move;
 
-        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+        pos = Camera.main.WorldToViewportPoint(transform.position);
         pos.x = Mathf.Clamp01(pos.x);
         pos.y = Mathf.Clamp01(pos.y);
         transform.position = Camera.main.ViewportToWorldPoint(new Vector3(pos.x, pos.y, 10));
