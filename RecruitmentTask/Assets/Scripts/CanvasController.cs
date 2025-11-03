@@ -18,5 +18,7 @@ public class CanvasController : MonoBehaviour
     public void SetEventSystemFirstSelected(GameObject go)
     {
         firstSelected = go;
+        var es = EventSystem.current;
+        es.SetSelectedGameObject(firstSelected);
     }
 }
